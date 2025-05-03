@@ -1,0 +1,114 @@
+
+@layer components {
+  .prose {
+    @apply max-w-none text-gray-700;
+
+    /* Headings */
+    h1 {
+      @apply text-3xl font-bold mt-6 mb-4 leading-tight;
+    }
+    h2 {
+      @apply text-2xl font-bold mt-6 mb-4 leading-tight;
+    }
+    h3 {
+      @apply text-xl font-bold mt-6 mb-4;
+    }
+
+    /* Paragraphs */
+    p {
+      @apply mt-4 mb-4 leading-[1.5];
+    }
+
+    /* Links */
+    a {
+      @apply text-blue-600 underline hover:text-blue-700;
+    }
+
+    /* Blockquotes */
+    blockquote {
+      @apply border-l-4 border-gray-300 pl-4 italic ml-4 mr-4 mt-6 mb-6;
+    }
+
+    /* Inline code */
+    code {
+      @apply bg-gray-100 px-1 py-0.5 rounded-md text-sm;
+    }
+
+    /* Code blocks */
+    pre {
+      @apply bg-gray-100 p-4 rounded-md overflow-auto mt-6 mb-6;
+    }
+
+    pre code {
+      @apply bg-transparent p-0;
+    }
+
+    /* Lists */
+    ul {
+      @apply list-disc pl-6 mt-4 mb-4;
+    }
+    ol {
+      @apply list-decimal pl-6 mt-4 mb-4;
+    }
+    li {
+      @apply mt-2 mb-2;
+    }
+    li > ul,
+    li > ol {
+      @apply mt-2 mb-2;
+    }
+
+    /* Tables */
+    table {
+      @apply w-full border-collapse mt-6 mb-6;
+    }
+    thead {
+      @apply border-b-2 border-gray-300;
+    }
+    th {
+      @apply p-2 text-left font-bold;
+    }
+    td {
+      @apply p-2 border-t border-gray-300;
+    }
+
+    /* Images */
+    img {
+      @apply max-w-full h-auto mt-4 mb-4;
+    }
+  }
+
+  .prose-invert {
+    @apply text-gray-300;
+
+    h1,
+    h2,
+    h3 {
+      @apply text-gray-100;
+    }
+
+    a {
+      @apply text-blue-400 hover:text-blue-300;
+    }
+
+    blockquote {
+      @apply border-l-gray-600 text-gray-400;
+    }
+
+    code {
+      @apply bg-gray-800;
+    }
+
+    pre {
+      @apply bg-gray-800;
+    }
+
+    thead {
+      @apply border-b-gray-600;
+    }
+
+    td {
+      @apply border-t-gray-700;
+    }
+  }
+}
