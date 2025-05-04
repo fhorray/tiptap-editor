@@ -1,36 +1,32 @@
-import React from 'react';
 import { Editor } from '@tiptap/react';
 import {
+  AlignCenter,
+  AlignJustify,
+  AlignLeft,
+  AlignRight,
   Bold,
-  Italic,
-  Underline,
-  Strikethrough,
+  FileCode,
   Heading1,
   Heading2,
   Heading3,
-  AlignLeft,
-  AlignCenter,
-  AlignRight,
-  AlignJustify,
+  Image,
+  Italic,
+  Link,
   List,
   ListOrdered,
   Quote,
-  Code,
-  Table,
-  Link,
-  Image,
-  Highlighter,
-  FileCode,
   Sparkles,
+  Strikethrough,
   SunMoon,
+  Table,
+  Underline,
 } from 'lucide-react';
-import {
-  HeadingLevel,
-  TextAlignOption,
-  EditorCommand,
-  AIFeature,
-} from '../constants';
-import { useTheme } from '../../../context/ThemeContext';
+import React from 'react';
+import { AIFeature } from '../constants';
+import { useTheme } from '../theme-context';
+import ColorPicker from './color-picker';
+import FontStylePicker from './font-style-picker';
+import { HighlightPicker } from './highlight-picker';
 
 interface EditorMenuBarProps {
   editor: Editor | null;
@@ -46,7 +42,7 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
   if (!editor) return null;
 
   const buttonClass = (active: boolean) =>
-    `p-2 rounded-md transition-all duration-200 ${
+    `p-2 rounded-md transition-all duration-200 cursor-pointer ${
       active
         ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900 dark:text-indigo-300'
         : 'hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -199,17 +195,13 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
         <FileCode size={18} />
       </button>
 
+      <ColorPicker editor={editor} />
+      <FontStylePicker editor={editor} />
+
       <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1"></div>
 
       {/* Highlighting and Special Features */}
-      <button
-        type="button"
-        onClick={() => editor.chain().focus().toggleHighlight().run()}
-        className={buttonClass(editor.isActive('highlight'))}
-        aria-label="Highlight"
-      >
-        <Highlighter size={18} />
-      </button>
+      <HighlightPicker editor={editor} />
 
       <button
         type="button"
@@ -255,7 +247,7 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       <button
         type="button"
         onClick={() => onAIFeatureRequest(AIFeature.TEXT_COMPLETION)}
-        className="p-2 rounded-md hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-600 dark:text-purple-400 transition-all duration-200"
+        className="p-2 rounded-md hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-600 dark:text-purple-400 transition-all duration-200 cursor-pointer"
         aria-label="AI Assistance"
       >
         <Sparkles size={18} />
@@ -265,7 +257,7 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       <button
         type="button"
         onClick={toggleTheme}
-        className="ml-auto p-2 rounded-md hover:bg-amber-100 dark:hover:bg-amber-900 text-amber-600 dark:text-amber-400 transition-all duration-200"
+        className="ml-auto p-2 rounded-md hover:bg-amber-100 dark:hover:bg-amber-900 text-amber-600 dark:text-amber-400 transition-all duration-200 cursor-pointer"
         aria-label="Toggle Theme"
       >
         <SunMoon size={18} />

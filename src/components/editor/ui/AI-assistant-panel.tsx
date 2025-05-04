@@ -1,6 +1,8 @@
-import React from 'react';
-import { Sparkles, CheckCircle, XCircle, Loader2 } from 'lucide-react';
+import React, { Dispatch, SetStateAction } from 'react';
+import { Sparkles, CheckCircle, XCircle, Loader2, XIcon } from 'lucide-react';
 import { AIFeature } from '../constants';
+import { Button } from '@/components/ui/button';
+import { renderHtmlAsJsx } from '../utils';
 
 interface AIAssistantPanelProps {
   isProcessing: boolean;
@@ -8,6 +10,7 @@ interface AIAssistantPanelProps {
   onRequestFeature: (feature: AIFeature) => void;
   onAcceptSuggestion: () => void;
   onRejectSuggestion: () => void;
+  onOpenChange: Dispatch<SetStateAction<boolean>>;
 }
 
 const AIAssistantPanel: React.FC<AIAssistantPanelProps> = ({
@@ -16,9 +19,20 @@ const AIAssistantPanel: React.FC<AIAssistantPanelProps> = ({
   onRequestFeature,
   onAcceptSuggestion,
   onRejectSuggestion,
+  onOpenChange,
 }) => {
   return (
-    <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-700 p-4 mt-4 transition-all duration-300 shadow-md">
+    <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-700 p-4 mt-4 transition-all duration-300">
+      <Button
+        type="button"
+        variant={'ghost'}
+        size={'icon'}
+        className="absolute right-2 top-2 z-10 cursor-pointer"
+        onClick={() => onOpenChange(false)}
+      >
+        <XIcon />
+      </Button>
+
       <div className="flex items-center gap-2 mb-3">
         <Sparkles className="text-purple-500 dark:text-purple-400" size={20} />
         <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200">
@@ -38,8 +52,8 @@ const AIAssistantPanel: React.FC<AIAssistantPanelProps> = ({
         </div>
       ) : aiSuggestion ? (
         <div className="mb-4">
-          <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800 rounded-md p-3 mb-3">
-            <p className="text-gray-700 dark:text-gray-300">{aiSuggestion}</p>
+          <div className="prose bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800 rounded-md p-3 mb-3">
+            {renderHtmlAsJsx(aiSuggestion)}
           </div>
           <div className="flex gap-2">
             <button

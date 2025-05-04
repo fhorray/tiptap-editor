@@ -13,6 +13,7 @@ import TableRow from '@tiptap/extension-table-row';
 import TextAlign from '@tiptap/extension-text-align';
 import TextStyle from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
+import Placeholder from '@tiptap/extension-placeholder';
 import {
   ReactNodeViewRenderer
 } from '@tiptap/react';
@@ -37,9 +38,13 @@ lowlight.register('css', css);
 lowlight.register('js', js);
 lowlight.register('ts', ts);
 
-export const extensions = ({ }) => {
+export const extensions = ({ placeholder }: { placeholder?: string }) => {
   return ([
     Document,
+    Placeholder.configure({
+      emptyEditorClass: 'is-editor-empty',
+      placeholder: placeholder ?? 'Write something or type "/" to insert a block...',
+    }),
     StarterKit.configure({
       heading: {
         levels: [1, 2, 3, 4, 5, 6],

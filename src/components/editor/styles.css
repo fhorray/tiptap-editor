@@ -3,6 +3,23 @@
   .prose {
     @apply max-w-none text-gray-700;
 
+    /* Placeholder */
+    p.is-editor-empty:first-child::before {
+      @apply text-gray-400;
+      content: attr(data-placeholder);
+      float: left;
+      height: 0;
+      pointer-events: none;
+    }
+  
+    p.is-empty::before {
+      @apply text-gray-400;
+      content: attr(data-placeholder);
+      float: left;
+      height: 0;
+      pointer-events: none;
+    }
+
     /* Headings */
     h1 {
       @apply text-3xl font-bold mt-6 mb-4 leading-tight;

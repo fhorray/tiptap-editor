@@ -1,6 +1,6 @@
 import { Editor } from '@tiptap/react';
 import { useCallback } from 'react';
-import { EditorState, FontFamily, FontSize, HeadingLevel, TextAlignOption } from '../components/editor/constants';
+import { EditorState, FontFamily, FontSize, HeadingLevel, TextAlignOption } from '../constants';
 
 export const useEditorState = (editor: Editor | null): EditorState => {
   const getCurrentEditorState = useCallback((): EditorState => {

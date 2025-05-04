@@ -1,23 +1,26 @@
+import { cn } from '@/lib/utils';
 import { Content, EditorContent, useEditor } from '@tiptap/react';
 import React, { useState } from 'react';
-import { useAIFeatures } from './hooks/useAIFeatures';
-import { useEditorState } from './hooks/useEditorState';
 import { AIFeature } from './constants';
 import { extensions } from './extensions';
+import { useAIFeatures } from './hooks/useAIFeatures';
+import { useEditorState } from './hooks/useEditorState';
 import AIAssistantPanel from './ui/AI-assistant-panel';
 import BubbleMenuComponent from './ui/bubble-menu';
-import ColorPicker from './ui/color-picker';
 import EditorMenuBar from './ui/editor-menu-bar';
 import FloatingMenuComponent from './ui/floating-menu';
-import FontStylePicker from './ui/font-style-picker';
 import TableMenu from './ui/table-menu';
 
 const RichTextEditor: React.FC = ({
   content,
   onChange,
+  options,
 }: {
   content?: Content;
   onChange?: (content: Content) => void;
+  options?: {
+    editorHeight?: number;
+  };
 }) => {
   const [showAIPanel, setShowAIPanel] = useState(false);
 
@@ -27,7 +30,7 @@ const RichTextEditor: React.FC = ({
     editorProps: {
       attributes: {
         class:
-          'prose prose-sm sm:prose lg:prose-lg dark:prose-invert focus:outline-none max-w-none min-h-[300px] p-5 font-sans',
+          'prose prose-sm sm:prose lg:prose-lg dark:prose-invert focus:outline-none max-w-none h-full p-5 font-sans',
       },
     },
     onUpdate: (editor) => {
@@ -66,7 +69,7 @@ const RichTextEditor: React.FC = ({
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 transition-colors duration-300 max-w-4xl mx-auto">
+    <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors duration-300 w-full mx-auto">
       {editor && (
         <>
           <EditorMenuBar
@@ -74,11 +77,13 @@ const RichTextEditor: React.FC = ({
             onAIFeatureRequest={handleAIFeatureRequest}
           />
 
-          <div className="relative">
-            <div className="flex items-center gap-2 absolute top-3 right-3 z-10">
-              <ColorPicker editor={editor} />
-              <FontStylePicker editor={editor} />
-            </div>
+          <div
+            className={cn(
+              'relative h-full min-h-[300px]',
+              options?.editorHeight,
+            )}
+          >
+            <div className="flex items-center gap-2 absolute top-3 right-3 z-10"></div>
 
             <BubbleMenuComponent
               editor={editor}
@@ -89,19 +94,20 @@ const RichTextEditor: React.FC = ({
               onAIFeatureRequest={handleAIFeatureRequest}
             />
 
-            <EditorContent editor={editor} className="min-h-[500px]" />
+            <EditorContent editor={editor} className="h-full" />
 
             <TableMenu editor={editor} />
           </div>
 
           {showAIPanel && (
-            <div className="p-4 pt-0">
+            <div className="relative p-4 pt-0">
               <AIAssistantPanel
                 isProcessing={isProcessing}
                 aiSuggestion={aiSuggestion}
                 onRequestFeature={handleAIFeatureRequest}
                 onAcceptSuggestion={acceptSuggestion}
                 onRejectSuggestion={rejectSuggestion}
+                onOpenChange={setShowAIPanel}
               />
             </div>
           )}

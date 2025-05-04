@@ -1,5 +1,5 @@
 import RichTextEditor from './components/editor/editor';
-import { ThemeProvider } from './context/ThemeContext';
+import { ThemeProvider } from './components/editor/theme-context';
 
 function App() {
   return (

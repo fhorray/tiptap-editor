@@ -5,7 +5,7 @@ import React, {
   useEffect,
   ReactNode,
 } from 'react';
-import { Theme } from '../components/editor/constants';
+import { Theme } from './constants';
 
 type ThemeContextType = {
   theme: Theme;
