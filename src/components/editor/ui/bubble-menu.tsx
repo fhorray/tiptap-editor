@@ -1,21 +1,21 @@
-import React from 'react';
-import { BubbleMenu as TiptapBubbleMenu, Editor } from '@tiptap/react';
+import { Editor, BubbleMenu as TiptapBubbleMenu } from '@tiptap/react';
 import {
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
   Bold,
-  Italic,
-  Underline,
-  Strikethrough,
+  Code,
   Heading1,
   Heading2,
+  Italic,
   Link,
-  Code,
-  AlignLeft,
-  AlignCenter,
-  AlignRight,
-  Sparkles,
   Palette,
+  Sparkles,
+  Strikethrough,
+  Underline,
 } from 'lucide-react';
-import { AIFeature } from '../../types/editorTypes';
+import React from 'react';
+import { AIFeature } from '../constants';
 
 interface BubbleMenuProps {
   editor: Editor;
@@ -37,10 +37,10 @@ const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
   const highlightColors = [
     { color: 'yellow', class: 'bg-yellow-200' },
-    { color: 'red', class: 'bg-red-200' },
-    { color: 'green', class: 'bg-green-200' },
-    { color: 'blue', class: 'bg-blue-200' },
-    { color: 'purple', class: 'bg-purple-200' },
+    { color: 'red', class: 'bg-red-200/40' },
+    { color: 'green', class: 'bg-green-200/40' },
+    { color: 'blue', class: 'bg-blue-200/40' },
+    { color: 'purple', class: 'bg-purple-200/40' },
   ];
 
   return (
@@ -132,7 +132,7 @@ const BubbleMenu: React.FC<BubbleMenuProps> = ({
         </button>
 
         {showHighlightColors && (
-          <div className="absolute top-full left-0 mt-1 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 p-1 grid grid-cols-5 gap-1">
+          <div className="w-[180px] absolute top-full left-0 mt-1 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 p-2 grid grid-cols-5 gap-1">
             {highlightColors.map(({ color, class: bgClass }) => (
               <button
                 key={color}
@@ -141,7 +141,7 @@ const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   editor.chain().focus().toggleHighlight({ color }).run();
                   setShowHighlightColors(false);
                 }}
-                className={`w-6 h-6 rounded-md ${bgClass} hover:ring-2 hover:ring-offset-2 hover:ring-gray-400`}
+                className={`w-6 h-6 rounded-md cursor-pointer ${bgClass} hover:ring-2 hover:ring-offset-2 hover:ring-gray-400`}
                 aria-label={`Highlight ${color}`}
               />
             ))}

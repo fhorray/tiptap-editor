@@ -6,7 +6,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { ColorPalette } from '../../types/editorTypes';
+import { ColorPalette } from '../constants';
 
 interface ColorPickerProps {
   editor: Editor | null;

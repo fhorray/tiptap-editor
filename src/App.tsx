@@ -1,7 +1,5 @@
-import React from 'react';
-import RichTextEditor from './components/editor/RichTextEditor';
+import RichTextEditor from './components/editor/editor';
 import { ThemeProvider } from './context/ThemeContext';
-import { Feather } from 'lucide-react';
 
 function App() {
   return (

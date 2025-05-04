@@ -1,6 +1,5 @@
-import { useState, useCallback } from 'react';
 import { Editor } from '@tiptap/react';
-import { AIFeature } from '../types/editorTypes';
+import { useCallback, useState } from 'react';
 
 export const useAIFeatures = (editor: Editor | null) => {
   const [isProcessing, setIsProcessing] = useState(false);

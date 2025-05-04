@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Editor } from '@tiptap/react';
 import { Type } from 'lucide-react';
-import { FontFamily, FontSize } from '../../types/editorTypes';
+import { FontFamily, FontSize } from '../constants';
 
 interface FontStylePickerProps {
   editor: Editor | null;

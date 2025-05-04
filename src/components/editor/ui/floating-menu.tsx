@@ -22,7 +22,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { AIFeature } from '../../types/editorTypes';
+import { AIFeature } from '../constants';
 
 interface FloatingMenuProps {
   editor: Editor;

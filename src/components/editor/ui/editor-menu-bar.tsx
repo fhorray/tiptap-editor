@@ -1,43 +1,61 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
-import { 
-  Bold, Italic, Underline, Strikethrough, Heading1, Heading2, Heading3, 
-  AlignLeft, AlignCenter, AlignRight, AlignJustify, 
-  List, ListOrdered, Quote, Code, Table, Link, Image, 
-  Highlighter, FileCode, Sparkles, SunMoon
+import {
+  Bold,
+  Italic,
+  Underline,
+  Strikethrough,
+  Heading1,
+  Heading2,
+  Heading3,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify,
+  List,
+  ListOrdered,
+  Quote,
+  Code,
+  Table,
+  Link,
+  Image,
+  Highlighter,
+  FileCode,
+  Sparkles,
+  SunMoon,
 } from 'lucide-react';
-import { 
-  HeadingLevel, 
-  TextAlignOption, 
+import {
+  HeadingLevel,
+  TextAlignOption,
   EditorCommand,
-  AIFeature
-} from '../../types/editorTypes';
-import { useTheme } from '../../context/ThemeContext';
+  AIFeature,
+} from '../constants';
+import { useTheme } from '../../../context/ThemeContext';
 
 interface EditorMenuBarProps {
   editor: Editor | null;
   onAIFeatureRequest: (feature: AIFeature) => void;
 }
 
-const EditorMenuBar: React.FC<EditorMenuBarProps> = ({ 
-  editor, 
-  onAIFeatureRequest 
+const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
+  editor,
+  onAIFeatureRequest,
 }) => {
   const { theme, toggleTheme } = useTheme();
-  
+
   if (!editor) return null;
 
-  const buttonClass = (active: boolean) => 
+  const buttonClass = (active: boolean) =>
     `p-2 rounded-md transition-all duration-200 ${
-      active 
-        ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900 dark:text-indigo-300' 
+      active
+        ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900 dark:text-indigo-300'
         : 'hover:bg-gray-100 dark:hover:bg-gray-800'
     } text-gray-700 dark:text-gray-300`;
 
   return (
     <div className="sticky top-0 z-10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 p-2 rounded-t-lg flex flex-wrap items-center gap-1 shadow-sm">
       {/* Text Formatting */}
-      <button 
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={buttonClass(editor.isActive('bold'))}
@@ -45,8 +63,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Bold size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={buttonClass(editor.isActive('italic'))}
@@ -54,8 +72,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Italic size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleUnderline().run()}
         className={buttonClass(editor.isActive('underline'))}
@@ -63,8 +81,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Underline size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleStrike().run()}
         className={buttonClass(editor.isActive('strike'))}
@@ -72,11 +90,11 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Strikethrough size={18} />
       </button>
-      
+
       <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1"></div>
-      
+
       {/* Headings */}
-      <button 
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
         className={buttonClass(editor.isActive('heading', { level: 1 }))}
@@ -84,8 +102,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Heading1 size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         className={buttonClass(editor.isActive('heading', { level: 2 }))}
@@ -93,8 +111,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Heading2 size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
         className={buttonClass(editor.isActive('heading', { level: 3 }))}
@@ -102,11 +120,11 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Heading3 size={18} />
       </button>
-      
+
       <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1"></div>
-      
+
       {/* Text Alignment */}
-      <button 
+      <button
         type="button"
         onClick={() => editor.chain().focus().setTextAlign('left').run()}
         className={buttonClass(editor.isActive({ textAlign: 'left' }))}
@@ -114,8 +132,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <AlignLeft size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().setTextAlign('center').run()}
         className={buttonClass(editor.isActive({ textAlign: 'center' }))}
@@ -123,8 +141,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <AlignCenter size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().setTextAlign('right').run()}
         className={buttonClass(editor.isActive({ textAlign: 'right' }))}
@@ -132,8 +150,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <AlignRight size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().setTextAlign('justify').run()}
         className={buttonClass(editor.isActive({ textAlign: 'justify' }))}
@@ -141,11 +159,11 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <AlignJustify size={18} />
       </button>
-      
+
       <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1"></div>
-      
+
       {/* Lists and Formatting */}
-      <button 
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={buttonClass(editor.isActive('bulletList'))}
@@ -153,8 +171,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <List size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={buttonClass(editor.isActive('orderedList'))}
@@ -162,8 +180,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <ListOrdered size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={buttonClass(editor.isActive('blockquote'))}
@@ -171,8 +189,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Quote size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         className={buttonClass(editor.isActive('codeBlock'))}
@@ -180,11 +198,11 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <FileCode size={18} />
       </button>
-      
+
       <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1"></div>
-      
+
       {/* Highlighting and Special Features */}
-      <button 
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleHighlight().run()}
         className={buttonClass(editor.isActive('highlight'))}
@@ -192,8 +210,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Highlighter size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => editor.chain().focus().toggleLink({ href: '' }).run()}
         className={buttonClass(editor.isActive('link'))}
@@ -201,8 +219,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Link size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
         onClick={() => {
           const url = window.prompt('Enter the image URL:');
@@ -215,20 +233,26 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Image size={18} />
       </button>
-      
-      <button 
+
+      <button
         type="button"
-        onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()}
+        onClick={() =>
+          editor
+            .chain()
+            .focus()
+            .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+            .run()
+        }
         className={buttonClass(editor.isActive('table'))}
         aria-label="Table"
       >
         <Table size={18} />
       </button>
-      
+
       <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1"></div>
-      
+
       {/* AI Features */}
-      <button 
+      <button
         type="button"
         onClick={() => onAIFeatureRequest(AIFeature.TEXT_COMPLETION)}
         className="p-2 rounded-md hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-600 dark:text-purple-400 transition-all duration-200"
@@ -236,9 +260,9 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Sparkles size={18} />
       </button>
-      
+
       {/* Theme Toggle */}
-      <button 
+      <button
         type="button"
         onClick={toggleTheme}
         className="ml-auto p-2 rounded-md hover:bg-amber-100 dark:hover:bg-amber-900 text-amber-600 dark:text-amber-400 transition-all duration-200"

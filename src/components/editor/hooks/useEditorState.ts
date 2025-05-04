@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
 import { Editor } from '@tiptap/react';
-import { EditorState, HeadingLevel, TextAlignOption } from '../types/editorTypes';
+import { useCallback } from 'react';
+import { EditorState, FontFamily, FontSize, HeadingLevel, TextAlignOption } from '../components/editor/constants';
 
 export const useEditorState = (editor: Editor | null): EditorState => {
   const getCurrentEditorState = useCallback((): EditorState => {
@@ -15,8 +15,8 @@ export const useEditorState = (editor: Editor | null): EditorState => {
         headingLevel: null,
         textAlign: TextAlignOption.LEFT,
         textColor: '#000000',
-        fontFamily: 'sans',
-        fontSize: 'base',
+        fontFamily: FontFamily.ARIAL,
+        fontSize: FontSize['16px'],
         isLink: false,
         isImage: false,
         isTable: false,
@@ -24,7 +24,7 @@ export const useEditorState = (editor: Editor | null): EditorState => {
         isOrderedList: false,
         isCodeBlock: false,
         isBlockquote: false,
-      };
+      }
     }
 
     // Determine heading level
@@ -44,7 +44,7 @@ export const useEditorState = (editor: Editor | null): EditorState => {
 
     // Get current text color
     const textColor = editor.getAttributes('textStyle')?.color || '#000000';
-    
+
     // Other states
     return {
       isBold: editor.isActive('bold'),
@@ -56,8 +56,8 @@ export const useEditorState = (editor: Editor | null): EditorState => {
       headingLevel,
       textAlign,
       textColor,
-      fontFamily: 'sans', // Example default, would be retrieved in a real implementation
-      fontSize: 'base', // Example default, would be retrieved in a real implementation
+      fontFamily: FontFamily.ARIAL,
+      fontSize: FontSize['16px'],
       isLink: editor.isActive('link'),
       isImage: editor.isActive('image'),
       isTable: editor.isActive('table'),

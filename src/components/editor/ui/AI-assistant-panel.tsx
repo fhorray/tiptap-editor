@@ -1,6 +1,6 @@
 import React from 'react';
 import { Sparkles, CheckCircle, XCircle, Loader2 } from 'lucide-react';
-import { AIFeature } from '../../types/editorTypes';
+import { AIFeature } from '../constants';
 
 interface AIAssistantPanelProps {
   isProcessing: boolean;
@@ -21,13 +21,20 @@ const AIAssistantPanel: React.FC<AIAssistantPanelProps> = ({
     <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-700 p-4 mt-4 transition-all duration-300 shadow-md">
       <div className="flex items-center gap-2 mb-3">
         <Sparkles className="text-purple-500 dark:text-purple-400" size={20} />
-        <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200">AI Assistant</h3>
+        <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200">
+          AI Assistant
+        </h3>
       </div>
-      
+
       {isProcessing ? (
         <div className="flex items-center justify-center py-4">
-          <Loader2 className="animate-spin text-purple-500 dark:text-purple-400 mr-2" size={20} />
-          <p className="text-gray-600 dark:text-gray-400">Processing your content...</p>
+          <Loader2
+            className="animate-spin text-purple-500 dark:text-purple-400 mr-2"
+            size={20}
+          />
+          <p className="text-gray-600 dark:text-gray-400">
+            Processing your content...
+          </p>
         </div>
       ) : aiSuggestion ? (
         <div className="mb-4">
@@ -60,35 +67,51 @@ const AIAssistantPanel: React.FC<AIAssistantPanelProps> = ({
             onClick={() => onRequestFeature(AIFeature.TEXT_COMPLETION)}
             className="flex flex-col items-center p-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-md hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:border-purple-200 dark:hover:border-purple-700 transition-colors"
           >
-            <span className="text-gray-700 dark:text-gray-300 font-medium">Complete Text</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">Suggest completions for your writing</span>
+            <span className="text-gray-700 dark:text-gray-300 font-medium">
+              Complete Text
+            </span>
+            <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Suggest completions for your writing
+            </span>
           </button>
-          
+
           <button
             type="button"
             onClick={() => onRequestFeature(AIFeature.GRAMMAR_CHECK)}
             className="flex flex-col items-center p-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-md hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:border-purple-200 dark:hover:border-purple-700 transition-colors"
           >
-            <span className="text-gray-700 dark:text-gray-300 font-medium">Check Grammar</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">Find and fix grammar issues</span>
+            <span className="text-gray-700 dark:text-gray-300 font-medium">
+              Check Grammar
+            </span>
+            <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Find and fix grammar issues
+            </span>
           </button>
-          
+
           <button
             type="button"
             onClick={() => onRequestFeature(AIFeature.STYLE_SUGGESTIONS)}
             className="flex flex-col items-center p-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-md hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:border-purple-200 dark:hover:border-purple-700 transition-colors"
           >
-            <span className="text-gray-700 dark:text-gray-300 font-medium">Style Suggestions</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">Improve your writing style</span>
+            <span className="text-gray-700 dark:text-gray-300 font-medium">
+              Style Suggestions
+            </span>
+            <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Improve your writing style
+            </span>
           </button>
-          
+
           <button
             type="button"
             onClick={() => onRequestFeature(AIFeature.CONTENT_SUMMARY)}
             className="flex flex-col items-center p-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-md hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:border-purple-200 dark:hover:border-purple-700 transition-colors"
           >
-            <span className="text-gray-700 dark:text-gray-300 font-medium">Summarize</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">Create a summary of your content</span>
+            <span className="text-gray-700 dark:text-gray-300 font-medium">
+              Summarize
+            </span>
+            <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Create a summary of your content
+            </span>
           </button>
         </div>
       )}

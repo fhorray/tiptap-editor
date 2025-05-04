@@ -1,5 +1,11 @@
-import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
-import { Theme } from '../types/editorTypes';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  ReactNode,
+} from 'react';
+import { Theme } from '../components/editor/constants';
 
 type ThemeContextType = {
   theme: Theme;
@@ -8,7 +14,9 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [theme, setTheme] = useState<Theme>(Theme.LIGHT);
 
   // Initialize theme from localStorage if available
