@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { NodeViewProps, NodeViewWrapper } from '@tiptap/react';
-import { Image, Upload, X, Loader2 } from 'lucide-react';
+import { Image, Upload, X, Loader2, XIcon } from 'lucide-react';
+import { deleteImageFn, uploadImageFn } from '../utils';
 
 export const ImageUploaderComponent = ({
   node,
@@ -52,11 +53,7 @@ export const ImageUploaderComponent = ({
     setError(null);
 
     try {
-      // Simulate upload delay
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // In a real implementation, you would upload to your backend here
-      const imageUrl = URL.createObjectURL(file);
+      const imageUrl = await uploadImageFn(file);
 
       updateAttributes({
         src: imageUrl,
@@ -71,7 +68,23 @@ export const ImageUploaderComponent = ({
     }
   };
 
-  if (node.attrs.src) {
+  const handleDeleteFile = async (url: string): Promise<boolean> => {
+    console.log('Delete file logic');
+
+    setIsUploading(true);
+    setError(null);
+
+    try {
+      const result = await deleteImageFn(url);
+      return result;
+    } catch (error) {
+      return false;
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  if (node.attrs.src && !isUploading) {
     return (
       <NodeViewWrapper>
         <div className="relative group">
@@ -83,11 +96,17 @@ export const ImageUploaderComponent = ({
           />
           <button
             type="button"
-            onClick={() => deleteNode()}
+            onClick={async () => {
+              const isSuccess = await handleDeleteFile('');
+
+              if (isSuccess) {
+                deleteNode();
+              }
+            }}
             className="absolute top-2 right-4 p-1 rounded-full bg-red-500 text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
             aria-label="Remove image"
           >
-            <X size={16} />
+            <XIcon size={16} />
           </button>
         </div>
       </NodeViewWrapper>
@@ -124,7 +143,7 @@ export const ImageUploaderComponent = ({
             <>
               <Loader2 size={24} className="text-indigo-500 animate-spin" />
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Uploading image...
+                Loading...
               </p>
             </>
           ) : (
