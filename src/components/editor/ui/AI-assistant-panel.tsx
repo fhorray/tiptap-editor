@@ -1,7 +1,13 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import { Sparkles, CheckCircle, XCircle, Loader2, XIcon } from 'lucide-react';
-import { AIFeature } from '../constants';
 import { Button } from '@/components/ui/button';
+import {
+  CheckCircleIcon,
+  Loader2,
+  Sparkles,
+  XCircleIcon,
+  XIcon,
+} from 'lucide-react';
+import React, { Dispatch, SetStateAction } from 'react';
+import { AIFeature } from '../constants';
 import { renderHtmlAsJsx } from '../utils';
 
 interface AIAssistantPanelProps {
@@ -61,7 +67,7 @@ const AIAssistantPanel: React.FC<AIAssistantPanelProps> = ({
               onClick={onAcceptSuggestion}
               className="flex items-center gap-1 px-3 py-1.5 bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800 rounded-md text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors"
             >
-              <CheckCircle size={16} />
+              <CheckCircleIcon size={16} />
               <span>Accept</span>
             </button>
             <button
@@ -69,7 +75,7 @@ const AIAssistantPanel: React.FC<AIAssistantPanelProps> = ({
               onClick={onRejectSuggestion}
               className="flex items-center gap-1 px-3 py-1.5 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 rounded-md text-red-700 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
             >
-              <XCircle size={16} />
+              <XCircleIcon size={16} />
               <span>Reject</span>
             </button>
           </div>

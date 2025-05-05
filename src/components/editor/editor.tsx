@@ -3,10 +3,11 @@ import { Content, EditorContent, useEditor } from '@tiptap/react';
 import React, { useState } from 'react';
 import { AIFeature } from './constants';
 import { extensions } from './extensions';
-import { useAIFeatures } from './hooks/useAIFeatures';
-import { useEditorState } from './hooks/useEditorState';
+import { useAIFeatures } from './hooks/use-AI-features';
+import { useEditorState } from './hooks/use-editor-state';
 import AIAssistantPanel from './ui/AI-assistant-panel';
 import BubbleMenuComponent from './ui/bubble-menu';
+import CharacterCount from './ui/character-count';
 import EditorMenuBar from './ui/editor-menu-bar';
 import FloatingMenuComponent from './ui/floating-menu';
 import TableMenu from './ui/table-menu';
@@ -14,12 +15,15 @@ import TableMenu from './ui/table-menu';
 const RichTextEditor: React.FC = ({
   content,
   onChange,
-  options,
+  options = {
+    useAi: false,
+  },
 }: {
   content?: Content;
   onChange?: (content: Content) => void;
   options?: {
     editorHeight?: number;
+    useAi?: boolean;
   };
 }) => {
   const [showAIPanel, setShowAIPanel] = useState(false);
@@ -74,6 +78,7 @@ const RichTextEditor: React.FC = ({
         <>
           <EditorMenuBar
             editor={editor}
+            useAi={options?.useAi}
             onAIFeatureRequest={handleAIFeatureRequest}
           />
 
@@ -91,6 +96,7 @@ const RichTextEditor: React.FC = ({
             />
             <FloatingMenuComponent
               editor={editor}
+              useAi={options?.useAi}
               onAIFeatureRequest={handleAIFeatureRequest}
             />
 
@@ -99,7 +105,11 @@ const RichTextEditor: React.FC = ({
             <TableMenu editor={editor} />
           </div>
 
-          {showAIPanel && (
+          <div className="p-4 flex justify-between items-center border-t border-gray-200 dark:border-gray-700">
+            <CharacterCount editor={editor} />
+          </div>
+
+          {showAIPanel && options?.useAi && (
             <div className="relative p-4 pt-0">
               <AIAssistantPanel
                 isProcessing={isProcessing}

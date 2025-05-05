@@ -1,40 +1,37 @@
-import React from 'react';
-import { FloatingMenu as TiptapFloatingMenu, Editor } from '@tiptap/react';
-import {
-  Heading1,
-  Heading2,
-  Heading3,
-  List,
-  ListOrdered,
-  Quote,
-  Code,
-  Image,
-  Table,
-  Sparkles,
-  Brain,
-  Wand2,
-  FileSearch,
-  MessageSquareText,
-  Upload,
-  Heading4Icon,
-  Heading3Icon,
-  Heading2Icon,
-  Heading1Icon,
-  ImageUpIcon,
-  ImageIcon,
-} from 'lucide-react';
-import { AIFeature } from '../constants';
 import { cn } from '@/lib/utils';
+import { Editor, FloatingMenu as TiptapFloatingMenu } from '@tiptap/react';
+import {
+  BrainIcon,
+  CodeIcon,
+  FileSearchIcon,
+  Heading1Icon,
+  Heading2Icon,
+  Heading3Icon,
+  Heading4Icon,
+  ImageIcon,
+  ImageUpIcon,
+  ListIcon,
+  ListOrderedIcon,
+  MessageSquareText,
+  QuoteIcon,
+  SparklesIcon,
+  TableIcon,
+  Wand2Icon,
+} from 'lucide-react';
+import React from 'react';
+import { AIFeature } from '../constants';
 import { ImageDialog } from './image-dialog';
 
 interface FloatingMenuProps {
   editor: Editor;
   onAIFeatureRequest?: (feature: AIFeature) => void;
+  useAi?: boolean;
 }
 
 const FloatingMenu: React.FC<FloatingMenuProps> = ({
   editor,
   onAIFeatureRequest,
+  useAi,
 }) => {
   const buttonClass =
     'flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-700 dark:text-gray-300 cursor-pointer';
@@ -135,7 +132,7 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({
             buttonClass,
           )}
         >
-          <List size={16} />
+          <ListIcon size={16} />
         </button>
 
         <button
@@ -146,7 +143,7 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({
             buttonClass,
           )}
         >
-          <ListOrdered size={16} />
+          <ListOrderedIcon size={16} />
         </button>
 
         <button
@@ -157,7 +154,7 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({
             buttonClass,
           )}
         >
-          <Quote size={16} />
+          <QuoteIcon size={16} />
         </button>
 
         <button
@@ -168,7 +165,7 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({
             buttonClass,
           )}
         >
-          <Code size={16} />
+          <CodeIcon size={16} />
         </button>
       </div>
 
@@ -211,19 +208,19 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({
             buttonClass,
           )}
         >
-          <Table size={16} />
+          <TableIcon size={16} />
         </button>
       </div>
 
       {/* AI Features */}
-      {onAIFeatureRequest && (
+      {onAIFeatureRequest && useAi && (
         <div className={sectionClass}>
           <button
             type="button"
             onClick={() => onAIFeatureRequest(AIFeature.TEXT_COMPLETION)}
             className={cn('w-full', buttonClass)}
           >
-            <Sparkles size={16} /> <span>Complete Text</span>
+            <SparklesIcon size={16} /> <span>Complete Text</span>
           </button>
 
           <button
@@ -231,7 +228,7 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({
             onClick={() => onAIFeatureRequest(AIFeature.GRAMMAR_CHECK)}
             className={cn('w-full', buttonClass)}
           >
-            <Brain size={16} /> <span>Check Grammar</span>
+            <BrainIcon size={16} /> <span>Check Grammar</span>
           </button>
 
           <button
@@ -239,7 +236,7 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({
             onClick={() => onAIFeatureRequest(AIFeature.STYLE_SUGGESTIONS)}
             className={cn('w-full', buttonClass)}
           >
-            <Wand2 size={16} /> <span>Style Suggestions</span>
+            <Wand2Icon size={16} /> <span>Style Suggestions</span>
           </button>
 
           <button
@@ -247,7 +244,7 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({
             onClick={() => onAIFeatureRequest(AIFeature.CONTENT_SUMMARY)}
             className={cn('w-full', buttonClass)}
           >
-            <FileSearch size={16} /> <span>Summarize</span>
+            <FileSearchIcon size={16} /> <span>Summarize</span>
           </button>
 
           <button

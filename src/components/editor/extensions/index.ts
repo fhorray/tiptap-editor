@@ -14,6 +14,9 @@ import TextAlign from '@tiptap/extension-text-align';
 import TextStyle from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
 import Placeholder from '@tiptap/extension-placeholder';
+import CharacterCount from '@tiptap/extension-character-count';
+import SearchAndReplace from "@sereneinserenade/tiptap-search-and-replace"
+import { Mention } from "../extensions/mention"
 import {
   ReactNodeViewRenderer
 } from '@tiptap/react';
@@ -58,6 +61,7 @@ export const extensions = ({ placeholder }: { placeholder?: string }) => {
     TextAlign.configure({
       types: ['heading', 'paragraph'],
     }),
+    // Mention,
     Image.configure({
       inline: false,
       allowBase64: true,
@@ -67,6 +71,7 @@ export const extensions = ({ placeholder }: { placeholder?: string }) => {
     }),
     ImageResize,
     ImageUploader,
+    SearchAndReplace,
     Link.configure({
       openOnClick: false,
       HTMLAttributes: {
@@ -75,6 +80,7 @@ export const extensions = ({ placeholder }: { placeholder?: string }) => {
     }),
     TextStyle,
     FontFamily,
+    CharacterCount,
     FontSize.configure({
       types: ['text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl'],
       defaultSize: 'text-base',

@@ -93,6 +93,20 @@ export enum AIFeature {
   CODE_SUGGESTIONS = 'codeSuggestions',
 }
 
+export enum TableBorderStyle {
+  NONE = 'none',
+  SOLID = 'solid',
+  DASHED = 'dashed',
+  DOTTED = 'dotted',
+  DOUBLE = 'double',
+}
+
+export enum ExportFormat {
+  HTML = 'html',
+  PDF = 'pdf',
+  MARKDOWN = 'markdown',
+}
+
 export interface EditorState {
   isBold: boolean;
   isItalic: boolean;
@@ -112,4 +126,38 @@ export interface EditorState {
   isOrderedList: boolean;
   isCodeBlock: boolean;
   isBlockquote: boolean;
+}
+
+export interface TableCell {
+  content: string;
+  rowSpan?: number;
+  colSpan?: number;
+  backgroundColor?: string;
+  textAlign?: TextAlignOption;
+}
+
+export interface TableStyles {
+  borderStyle: TableBorderStyle;
+  borderColor: string;
+  borderWidth: number;
+  cellPadding: number;
+  backgroundColor?: string;
+}
+
+export interface MentionUser {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+}
+
+export interface CharacterCount {
+  characters: number;
+  words: number;
+}
+
+export interface SearchResult {
+  from: number;
+  to: number;
+  text: string;
 }

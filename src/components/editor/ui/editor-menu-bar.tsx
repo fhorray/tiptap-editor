@@ -31,11 +31,13 @@ import { HighlightPicker } from './highlight-picker';
 interface EditorMenuBarProps {
   editor: Editor | null;
   onAIFeatureRequest: (feature: AIFeature) => void;
+  useAi?: boolean;
 }
 
 const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
   editor,
   onAIFeatureRequest,
+  useAi,
 }) => {
   const { theme, toggleTheme } = useTheme();
 
@@ -241,17 +243,20 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
         <Table size={18} />
       </button>
 
-      <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1"></div>
-
       {/* AI Features */}
-      <button
-        type="button"
-        onClick={() => onAIFeatureRequest(AIFeature.TEXT_COMPLETION)}
-        className="p-2 rounded-md hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-600 dark:text-purple-400 transition-all duration-200 cursor-pointer"
-        aria-label="AI Assistance"
-      >
-        <Sparkles size={18} />
-      </button>
+      {useAi && (
+        <>
+          <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1" />
+          <button
+            type="button"
+            onClick={() => onAIFeatureRequest(AIFeature.TEXT_COMPLETION)}
+            className="p-2 rounded-md hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-600 dark:text-purple-400 transition-all duration-200 cursor-pointer"
+            aria-label="AI Assistance"
+          >
+            <Sparkles size={18} />
+          </button>
+        </>
+      )}
 
       {/* Theme Toggle */}
       <button
