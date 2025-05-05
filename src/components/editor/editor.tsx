@@ -12,18 +12,17 @@ import EditorMenuBar from './ui/editor-menu-bar';
 import FloatingMenuComponent from './ui/floating-menu';
 import TableMenu from './ui/table-menu';
 
-const RichTextEditor: React.FC = ({
+const RichTextEditor = ({
   content,
   onChange,
-  options = {
-    useAi: false,
-  },
+  useAi = false,
+  options = {},
 }: {
   content?: Content;
   onChange?: (content: Content) => void;
+  useAi?: boolean;
   options?: {
     editorHeight?: number;
-    useAi?: boolean;
   };
 }) => {
   const [showAIPanel, setShowAIPanel] = useState(false);
@@ -78,7 +77,7 @@ const RichTextEditor: React.FC = ({
         <>
           <EditorMenuBar
             editor={editor}
-            useAi={options?.useAi}
+            useAi={useAi}
             onAIFeatureRequest={handleAIFeatureRequest}
           />
 
@@ -96,7 +95,7 @@ const RichTextEditor: React.FC = ({
             />
             <FloatingMenuComponent
               editor={editor}
-              useAi={options?.useAi}
+              useAi={useAi}
               onAIFeatureRequest={handleAIFeatureRequest}
             />
 
@@ -109,7 +108,7 @@ const RichTextEditor: React.FC = ({
             <CharacterCount editor={editor} />
           </div>
 
-          {showAIPanel && options?.useAi && (
+          {showAIPanel && useAi && (
             <div className="relative p-4 pt-0">
               <AIAssistantPanel
                 isProcessing={isProcessing}
