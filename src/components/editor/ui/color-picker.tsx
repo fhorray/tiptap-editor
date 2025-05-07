@@ -29,7 +29,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ editor }) => {
       <PopoverTrigger asChild>
         <button
           type="button"
-          className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-all duration-200 flex items-center gap-1"
+          className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-all duration-200 flex items-center gap-1 cursor-pointer"
           style={{ color: currentColor }}
           aria-label="Text Color"
         >

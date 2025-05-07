@@ -91,6 +91,7 @@ const RichTextEditor = ({
 
             <BubbleMenuComponent
               editor={editor}
+              useAi={useAi}
               onAIFeatureRequest={handleAIFeatureRequest}
             />
             <FloatingMenuComponent

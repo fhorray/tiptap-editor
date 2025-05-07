@@ -20,14 +20,16 @@ import { HighlightPicker } from './highlight-picker';
 interface BubbleMenuProps {
   editor: Editor;
   onAIFeatureRequest?: (feature: AIFeature) => void;
+  useAi?: boolean;
 }
 
 const BubbleMenu: React.FC<BubbleMenuProps> = ({
   editor,
   onAIFeatureRequest,
+  useAi = false,
 }) => {
   const buttonClass = (active: boolean) =>
-    `p-1.5 rounded-md transition-all duration-200 ${
+    `p-1.5 rounded-md transition-all duration-200 cursor-pointer ${
       active
         ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900 dark:text-indigo-300'
         : 'hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -46,7 +48,8 @@ const BubbleMenu: React.FC<BubbleMenuProps> = ({
         return (
           from !== to &&
           !editor.isActive('codeBlock') &&
-          !editor.isActive('table')
+          !editor.isActive('table') &&
+          !editor.isActive('imageUploader')
         );
       }}
     >
@@ -179,14 +182,14 @@ const BubbleMenu: React.FC<BubbleMenuProps> = ({
         <AlignRight size={16} />
       </button>
 
-      <div className="w-px h-5 bg-gray-300 dark:bg-gray-700"></div>
       {/* AI Feature */}
-      {onAIFeatureRequest && (
+      {onAIFeatureRequest && useAi && (
         <>
+          <div className="w-px h-5 bg-gray-300 dark:bg-gray-700"></div>
           <button
             type="button"
             onClick={() => onAIFeatureRequest(AIFeature.TEXT_COMPLETION)}
-            className="p-1.5 rounded-md hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-600 dark:text-purple-400 transition-all duration-200"
+            className="p-1.5 rounded-md hover:bg-purple-100 dark:hover:bg-purple-900 text-purple-600 dark:text-purple-400 transition-all duration-200 cursor-pointer"
             aria-label="AI Assistance"
           >
             <Sparkles size={16} />

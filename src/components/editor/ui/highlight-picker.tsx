@@ -14,7 +14,7 @@ export const HighlightPicker = ({ editor }: { editor: Editor }) => {
   const [showHighlightColors, setShowHighlightColors] = useState(false);
 
   const buttonClass = (active: boolean) =>
-    `p-1.5 rounded-md transition-all duration-200 ${
+    `p-1.5 rounded-md transition-all duration-200 cursor-pointer ${
       active
         ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900 dark:text-indigo-300'
         : 'hover:bg-gray-100 dark:hover:bg-gray-800'

@@ -1,7 +1,7 @@
 
 @layer components {
   .prose {
-    @apply max-w-none text-gray-700;
+    @apply max-w-none text-gray-700 dark:text-white;
 
     /* Placeholder */
     p.is-editor-empty:first-child::before {
