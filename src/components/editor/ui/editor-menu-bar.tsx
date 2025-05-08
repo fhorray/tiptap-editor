@@ -27,6 +27,7 @@ import { useTheme } from '../theme-context';
 import ColorPicker from './color-picker';
 import FontStylePicker from './font-style-picker';
 import { HighlightPicker } from './highlight-picker';
+import { EmojiToolbarButton } from './emoji-picker-button';
 
 interface EditorMenuBarProps {
   editor: Editor | null;
@@ -88,6 +89,8 @@ const EditorMenuBar: React.FC<EditorMenuBarProps> = ({
       >
         <Strikethrough size={18} />
       </button>
+
+      <EmojiToolbarButton editor={editor} />
 
       <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1"></div>
 

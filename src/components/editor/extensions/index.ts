@@ -17,6 +17,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import CharacterCount from '@tiptap/extension-character-count';
 import SearchAndReplace from "@sereneinserenade/tiptap-search-and-replace"
 import { Mention } from "../extensions/mention"
+import EmojiExtension from "../extensions/emoji-picker/"
 import {
   ReactNodeViewRenderer
 } from '@tiptap/react';
@@ -43,7 +44,6 @@ lowlight.register('ts', ts);
 
 export const extensions = ({ placeholder }: { placeholder?: string }) => {
   return ([
-    Document,
     Placeholder.configure({
       emptyEditorClass: 'is-editor-empty',
       placeholder: placeholder ?? 'Write something or type "/" to insert a block...',
@@ -62,14 +62,14 @@ export const extensions = ({ placeholder }: { placeholder?: string }) => {
       types: ['heading', 'paragraph'],
     }),
     // Mention,
-    Image.configure({
+    EmojiExtension,
+    ImageResize.configure({
       inline: false,
       allowBase64: true,
       HTMLAttributes: {
         class: 'rounded-lg max-w-full',
       },
     }),
-    ImageResize,
     ImageUploader,
     SearchAndReplace,
     Link.configure({
@@ -89,7 +89,6 @@ export const extensions = ({ placeholder }: { placeholder?: string }) => {
     Highlight.configure({
       multicolor: true,
     }),
-    Gapcursor,
     Table.configure({
       resizable: true,
       HTMLAttributes: {

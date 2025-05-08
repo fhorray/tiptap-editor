@@ -155,5 +155,10 @@
     td {
       @apply border-t-gray-700;
     }
+
+    /* Emoji */
+    .emoji-inline {
+      @apply inline align-middle text-lg bg-red-800;
+    }
   }
 }
